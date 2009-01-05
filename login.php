@@ -3,18 +3,22 @@ require 'includes/functions.inc.php';
 
 if ($_SESSION['uid'])
   goto('index.php');
+  
+$name = array_key_exists('name', $_POST) ? $_POST['name'] : NULL;
 
-if (array_key_exists('name', $_POST) && array_key_exists('pass', $_POST))
-  user_login($_POST['name'], $_POST['pass']);
+if ($name && array_key_exists('pass', $_POST))
+  user_login($name, $_POST['pass']);
 
 if ($_SESSION['uid'])
   goto('index.php');
 
-if (array_key_exists('name', $_POST))
-  messages('Unknown username or password<br>' . l('register.php', 'Register',  array('name' => filter_var($_POST['name']))));
+if ($name)
+  messages('Unknown username or password');
 ?>
 
 <?php include 'html/header.html'; ?>
+
+<div class="link"><?php print l('register.php', 'Register',  array('name' => filter_var($name))); ?></a>
 
 <form id="login" action="" method="POST">
   <input type="text" name="name" id="login-name" value="<?php if (array_key_exists('name', $_REQUEST)) print filter_var($_REQUEST['name']); ?>">

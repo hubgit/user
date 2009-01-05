@@ -35,7 +35,7 @@ function user_insert($name, $pass){
 
 function user_register($name, $pass){
   if (user_load(NULL, $name))
-    messages('Username already exists. ' . l('login.php', 'Sign in', array('name' => filter_var($name))));
+    messages('Username already exists.');
   else
     user_insert($name, $pass);
 }
