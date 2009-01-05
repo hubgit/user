@@ -1,12 +1,11 @@
-<?php $messages = messages(); ?>
 <html>
 <head>
   <title></title>
 </head>
 <body>
-  <?php if (!empty($messages)): ?>
+  <?php if (!empty($_SESSION['messages'])): ?>
   <ul id="messages">
-    <?php foreach ($messages as $key => $message): ?>
+    <?php foreach ($_SESSION['messages'] as $key => $message): ?>
        <li class="message"><?php print $message; unset($_SESSION['messages'][$key]); ?></li>
     <?php endforeach; ?>
   </ul>

@@ -10,8 +10,6 @@ mysql_query('SET NAMES utf8');
 function messages($message = NULL){
   if ($message)
     $_SESSION['messages'][] = $message;
-  else
-    return $_SESSION['messages'];
 }
 
 function goto($url, $message = NULL){
