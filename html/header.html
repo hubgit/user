@@ -1,0 +1,20 @@
+<?php $messages = messages(); ?>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <?php if (!empty($messages)): ?>
+  <ul id="messages">
+    <?php foreach ($messages as $key => $message): ?>
+       <li class="message"><?php print $message; unset($_SESSION['messages'][$key]); ?></li>
+    <?php endforeach; ?>
+  </ul>
+ <?php endif; ?>
+ 
+<?php
+  if ($_SESSION['uid'])
+    print l('logout.php', 'Sign out');
+  else if (!in_array(basename($_SERVER['SCRIPT_NAME']), array('register.php', 'login.php')))
+    print l('login.php', 'Sign in');
+?>
