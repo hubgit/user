@@ -2,6 +2,7 @@
 
 require 'libs/PasswordHash.php';
 
+session_name('example');
 session_start();
 
 function user_load($id = NULL, $name = NULL){
@@ -52,8 +53,9 @@ function user_login($name, $pass){
 
 function user_logout(){
   if ($_SESSION['uid']){
-    unset($_SESSION['uid']);
+    $_SESSION = array();
+    if (isset($_COOKIE[session_name()]))
+       setcookie(session_name(), '', time() - 42000, '/');
     session_destroy();
-    // delete cookie?
   }
 }
