@@ -31,14 +31,17 @@ function user_insert($name, $pass){
   $hasher = new PasswordHash(8, FALSE); 
   $result = db_query("INSERT INTO users (name, pass) VALUES ('%s', '%s')", $name, $hasher->HashPassword($pass));
   if ($result)
-    $_SESSION['uid'] = mysql_insert_id();
+    return mysql_insert_id();
 }
 
 function user_register($name, $pass){
   if (user_load(NULL, $name))
     messages('Username already exists.');
   else
-    user_insert($name, $pass);
+    $id = user_insert($name, $pass);
+  
+  if ($id)
+    $_SESSION['uid'] = $id;
 }
 
 function user_login($name, $pass){
