@@ -23,7 +23,7 @@ function goto($url, $message = NULL){
 function l($url, $title, $params = array()){
   if (!empty($params))
     $url .= '?' . http_build_query($params);
-  return sprintf('<a href="%s">%s</a>', filter_var(filter_var($url, FILTER_SANITIZE_URL), FILTER_SANITIZE_SPECIAL_CHARS), filter_var($title, FILTER_SANITIZE_ENCODED));
+  return sprintf('<a href="%s">%s</a>', filter_var(filter_var($url, FILTER_SANITIZE_URL), FILTER_SANITIZE_SPECIAL_CHARS), filter_var($title, FILTER_SANITIZE_STRING));
 }
 
 function db_query(){
@@ -45,7 +45,7 @@ function db_query(){
 }
 
 function debug($item){
-  $debug = 0;
+  $debug = 1;
   if ($debug){
     print_r($item);
     print "<br/>\n";
