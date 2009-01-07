@@ -132,7 +132,7 @@ function user_validate_email($id, $email){
   mail($user->email, 'Confirm email address', sprintf("Confirmation link: %s\n", 'http://example.com/confirm-email.php?token=' . urlencode($token)), $headers);
   
   $result = db_query("UPDATE users SET email_tmp = '%s', email_token = '%s' WHERE id = %d", $email, $token, $user->id);
-  messages(sprintf('Follow the link in the confirmation email sent to <b>%s</b> to confirm the change of email address', filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS)));
+  messages(sprintf('Follow the link in the confirmation email sent to <b>%s</b> to confirm the change of email address.', filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS)));
   
   return FALSE;
 }
@@ -145,6 +145,7 @@ function user_confirm_email($token){
     goto('edit.php', 'Invalid token');
     
   $result = db_query("UPDATE users SET email = email_tmp, email_tmp = NULL, email_token = NULL WHERE id = %d", $id);
+  $_SESSION['uid'] = $id;
   user_refresh($id);
   goto('edit.php', 'Your email address has been updated.');
 }
