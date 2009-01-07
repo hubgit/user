@@ -25,6 +25,8 @@ include 'html/header.php';
   <label for="register-password">Password</label><br>
   <!--<input type="text" name="email" id="register-email" value="<?php if (array_key_exists('email', $_REQUEST)) print filter_var($_REQUEST['email'], FILTER_SANITIZE_SPECIAL_CHARS); ?>"> 
   <label for="register-email">Email address</label><br>-->
+  
+  <input type="hidden" name="form-token" value="<?php print $_SESSION['form-token']; ?>">
   <input type="submit" value="Register">
 </form>
 

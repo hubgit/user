@@ -127,5 +127,5 @@ function user_set_profile($id, $key, $value){
 
   db_query("UPDATE users SET `%s` = '%s' WHERE id = %d", $key, $value, $id);
   if (mysql_affected_rows())
-    messages("$key updated.");
+    messages(sprintf('%s updated', ucfirst($key)));
 }

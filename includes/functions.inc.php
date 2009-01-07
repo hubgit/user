@@ -37,7 +37,7 @@ function db_query(){
 }
 
 function debug($item){
-  $debug = 1;
+  $debug = 0;
   if ($debug){
     print_r($item);
     print "<br/>\n";
