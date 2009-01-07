@@ -45,10 +45,11 @@ function user_register($name, $pass){
 }
 
 function user_login($name, $pass){
-  $hasher = new PasswordHash(8, FALSE);
   $result = db_query("SELECT id, pass FROM users WHERE name = '%s'", $name);
   if (mysql_num_rows($result)){
     $user = mysql_fetch_object($result);
+
+    $hasher = new PasswordHash(8, FALSE);
     if ($hasher->CheckPassword($pass, $user->pass))
       $_SESSION['uid'] = $user->id;
   }
@@ -93,5 +94,25 @@ function user_reset_password($token){
     
   $result = db_query("UPDATE users SET pass = pass_tmp, pass_tmp = NULL, token = NULL WHERE id = %d", $id);
   $_SESSION['uid'] = $id;
-  goto('edit.php', 'Your new password is now active. You may edit it here if you like.'); 
+  goto('edit.php', 'Your new password is now active and you are signed in. You may edit your profile here if you like.'); 
+}
+
+function user_set_password($id, $pass){
+  $result = db_query("SELECT pass FROM users WHERE id = %d", $id);
+  $user = mysql_fetch_object($result);
+
+  $hasher = new PasswordHash(8, FALSE);
+  if ($hasher->CheckPassword($pass, $user->pass))
+    return; // password unchanged
+    
+  $result = db_query("UPDATE users SET pass = '%s' WHERE id = %d", $hasher->HashPassword($pass), $id);
+  if (mysql_affected_rows())
+    messages('Password updated.');
+}
+
+function user_set_email($id, $name){
+  // TODO: confirm email address
+  $result = db_query("UPDATE users SET name = '%s' WHERE id = %d AND name != '%s'", $name, $id, $name);
+  if (mysql_affected_rows())
+    messages('Email updated.');
 }

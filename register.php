@@ -24,5 +24,6 @@ if ($_SESSION['uid'])
 </form>
 
 <ul id="links">
-  <li>If you already have an account, <?php print l('login.php', 'sign in', array('name' => $name)); ?> instead.</li>
+  <li>If you already have an account, <?php print l('login.php', 'sign in', array('name' => $_REQUEST['name'])); ?> instead.</li>
+  <li>Forgot your password? <?php print l('reset.php', 'Reset it'); ?> now.</li>
 </ul>

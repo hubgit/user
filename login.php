@@ -27,6 +27,6 @@ if ($name)
 </form>
 
 <ul id="links">
-  <li>If you haven't already got an account, <?php print l('register.php', 'register',  array('name' => $name)); ?> first.</li>
+  <li>If you haven't already got an account, <?php print l('register.php', 'register',  array('name' => $_REQUEST['name'])); ?> first.</li>
   <li>Forgot your password? <?php print l('reset.php', 'Reset it'); ?> now.</li>
 </ul>

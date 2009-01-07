@@ -17,7 +17,7 @@ if ($_SESSION['uid']){
 
 <ul id="links">
   <?php if ($_SESSION['uid']): ?>
-    <li><?php print l('edit.php', 'Edit you profile'); ?></li>
+    <li><?php print l('edit.php', 'Edit your profile'); ?></li>
     <li><?php print l('logout.php', 'Sign out'); ?></li>
   <?php else: ?>
     <li>If you already have an account, <?php print l('login.php', 'sign in', array('name' => $name)); ?>.</li>
