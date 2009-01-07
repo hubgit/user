@@ -1,19 +1,5 @@
 <?php
 
-$site_name = 'Example';
-
-require 'includes/config.inc.php';
-require 'includes/user.inc.php';
-
-mysql_connect('localhost', $config['db']['user'], $config['db']['password']) or die('Could not connect to MySQL server'); // SERVER, DB USERNAME, DB PASSWORD
-mysql_select_db('test_users'); // DATABASE
-mysql_query('SET NAMES utf8');
-
-$link_vars = array(
-  'name' => $_REQUEST['name'],
-  'email' => $_REQUEST['email']
-);
-
 function messages($message = NULL){
   if ($message)
     $_SESSION['messages'][] = $message;
@@ -66,7 +52,13 @@ function generate_token($length = 16){
   return $result;
 }
 
-function form_token(){
-   
+function validate_form_token(){
+  if (array_key_exists('form-token', $_SESSION))
+    if ($_REQUEST['form-token'] == $_SESSION['form-token'])
+      return true;
+    else
+      messages('Invalid form token');
+  else // anonymous
+    return TRUE;
 }
 

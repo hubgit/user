@@ -2,9 +2,6 @@
 
 require 'libs/PasswordHash.php';
 
-session_name('example');
-session_start();
-
 function user_load($id = NULL, $name = NULL, $email = NULL, $cached = TRUE){
   static $users;
   if (!isset($users))
@@ -51,8 +48,11 @@ function user_login($name, $password){
   if (!$user) return false;
   
   $hasher = new PasswordHash(8, FALSE);
-  if ($hasher->CheckPassword($password, $user->password))
+  if ($hasher->CheckPassword($password, $user->password)){
+    session_regenerate_id(TRUE);
     $_SESSION['uid'] = $user->id;
+    $_SESSION['form-token'] = generate_token();
+  }
 }
 
 function user_logout(){

@@ -1,5 +1,5 @@
 <?php
-require 'includes/functions.inc.php';
+require 'includes/main.inc.php';
 
 if (!$_SESSION['uid'])
   goto('login.php');

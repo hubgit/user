@@ -1,16 +1,21 @@
 <?php
-require 'includes/functions.inc.php';
+require 'includes/main.inc.php';
 
 if (!$_SESSION['uid'])
   goto('login.php');
 
 $user = user_load($_SESSION['uid']);
+
+if (validate_form_token()){
+  foreach (array('password', 'name', 'email') as $key)
+    if (array_key_exists($key, $_POST) && $_POST[$key] && $_POST[$key] != $user->{$key})
+      user_set_profile($_SESSION['uid'], $key, $_POST[$key]);
   
-foreach (array('password', 'name', 'email') as $key)
-  if (array_key_exists($key, $_POST) && $_POST[$key] && $_POST[$key] != $user->{$key})
-    user_set_profile($_SESSION['uid'], $key, $_POST[$key]);
-  
-$user = user_load($_SESSION['uid'], NULL, NULL, FALSE); // load fresh
+  $user = user_load($_SESSION['uid'], NULL, NULL, FALSE); // load fresh
+}
+else{
+ 
+}
 ?>
 
 <?php 
@@ -31,6 +36,7 @@ include 'html/header.php';
     <label for="edit-email">Email address</label><br>
   </div>
   
+  <input type="hidden" name="form-token" value="<?php print $_SESSION['form-token']; ?>">
   <input type="submit" value="Save">
 </form>
 
