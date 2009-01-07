@@ -1,14 +1,16 @@
 <?php
 
-$format = parse_accept_headers();
+list($type, $format) = parse_accept_headers();
 
 $file = basename($_SERVER['SCRIPT_FILENAME'], '.php');
 $file = preg_replace('/[^a-z]/', '', $file); // sanitize
 
 $template = sprintf('%s/%s.tpl.php', $format, $file);
+
+header("Content-Type: $type;charset=UTF-8");
 require $format . '/content.tpl.php';
 
-function parse_accept_headers(){
+function parse_accept_headers($default = 'html'){
   $formats = array(
     'text/html' => 'html',
     'application/xhtml+xml' => 0,
@@ -16,21 +18,20 @@ function parse_accept_headers(){
     '*/*' => 'html',
     );
 
-  $accept = explode(',', $_SERVER['HTTP_ACCEPT']);
-  $accepted = array();
-  foreach ($accept as $header){
+  $accept = array();
+  foreach (explode(',', $_SERVER['HTTP_ACCEPT']) as $header){
     $parts = explode(';q=', $header);
     if (count($parts) === 1)
       $parts[1] = 1;
-    $accepted[$parts[0]] = $parts[1];
+    $accept[$parts[0]] = $parts[1];
   }
 
-  arsort($accepted);
-  $accepted[] = 'html'; // default
+  arsort($accept);
+  $accept[] = $default;
 
-  foreach ($accepted as $format => $q)
+  foreach ($accept as $format => $q)
     if (array_key_exists($format, $formats) && $formats[$format])
       break;
   
-  return $formats[$format];
+  return array($format, $formats[$format]);
 }
