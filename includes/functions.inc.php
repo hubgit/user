@@ -59,3 +59,14 @@ function debug($item){
   }
 }
 
+function generate_token($length = 16){
+  $urandom = fopen('/dev/urandom', 'rb');
+  $result = md5(fread($urandom, $length));
+  fclose($urandom);
+  return $result;
+}
+
+function form_token(){
+   
+}
+

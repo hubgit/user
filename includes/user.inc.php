@@ -73,16 +73,13 @@ function user_send_password_reset($name){
     return;
   }
   
-  $urandom = fopen('/dev/urandom', 'rb');
-  $password = md5(fread($urandom, 16));
+  $password = generate_token();
   
   do {
-    $token = md5(fread($urandom, 16)); // TODO: check uniqueness
+    $token = generate_token();
     $result = db_query("SELECT * FROM users WHERE token = '%s'", $token);
   } while (mysql_num_rows($result));
-  
-  fclose($urandom);
-  
+    
   $headers = sprintf("From: %s\r\n", 'test@example.com');
   mail($user->email, 'New password', sprintf("Password: %s\nConfirmation link: %s\n", $password, 'http://example.com/reset.php?token=' . urlencode($token)), $headers);
   
