@@ -56,4 +56,3 @@ function validate_form_token(){
     exit('Invalid form token');
   return TRUE;
 }
-

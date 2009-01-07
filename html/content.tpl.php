@@ -24,3 +24,7 @@
     <?php endforeach; ?>
   </ul>
  <?php endif; ?>
+ 
+ <?php include $body_template; ?>
+</body>
+</html>
