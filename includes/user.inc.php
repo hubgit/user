@@ -80,8 +80,10 @@ function user_send_password_reset($name){
   } while (mysql_num_rows($result));
   
   global $config;
+  
   $headers = sprintf("From: %s\r\n", $config['site']['email']);
-  mail($user->email, 'New password', sprintf("Password: %s\nConfirmation link: %s\n", $password, 'http://example.com/reset.php?token=' . urlencode($token)), $headers);
+  $link = sprintf('http://%s%s/reset.php?token=%s', $_SERVER['SERVER_NAME'], $config['site']['root'], urlencode($token));
+  mail($user->email, 'New password', sprintf("Password: %s\nConfirmation link: %s\n", $password, $link), $headers);
   
   $result = db_query("UPDATE users SET password_tmp = '%s', password_token = '%s' WHERE id = %d", $password, $token, $user->id);
   goto('index.php', 'Password sent by email'); 
@@ -119,9 +121,7 @@ function user_validate_password($id, $password){
    return $hasher->HashPassword($password);
 }
 
-function user_validate_email($id, $email){
-  $user = user_load($id);
-    
+function user_validate_email($id, $email){    
   do {
     $token = generate_token();
     $result = db_query("SELECT * FROM users WHERE email_token = '%s'", $token);
@@ -129,9 +129,10 @@ function user_validate_email($id, $email){
   
   global $config;
   $headers = sprintf("From: %s\r\n", $config['site']['email']);
-  mail($user->email, 'Confirm email address', sprintf("Confirmation link: %s\n", 'http://example.com/confirm-email.php?token=' . urlencode($token)), $headers);
+  $link = sprintf('http://%s%s/edit.php?token=%s', $_SERVER['SERVER_NAME'], $config['site']['root'], urlencode($token));
+  mail($email, 'Confirm email address', "Confirmation link: $link\n", $headers);
   
-  $result = db_query("UPDATE users SET email_tmp = '%s', email_token = '%s' WHERE id = %d", $email, $token, $user->id);
+  $result = db_query("UPDATE users SET email_tmp = '%s', email_token = '%s' WHERE id = %d", $email, $token, $id);
   messages(sprintf('Follow the link in the confirmation email sent to <b>%s</b> to confirm the change of email address', filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS)));
   
   return FALSE;
