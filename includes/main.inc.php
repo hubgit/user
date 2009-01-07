@@ -16,7 +16,7 @@ if (!isset($_SESSION['form-token'])) {
   $_SESSION['form-token'] = generate_token(); 
 }
 
-debug($_SESSION);
+//debug($_SESSION);
 
 if (!empty($_POST))
   validate_form_token();

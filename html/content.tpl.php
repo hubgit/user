@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <title><?php
     if ($title)
@@ -8,6 +9,7 @@
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
   <link rel="stylesheet" href="css/style.css"/>
 </head>
+
 <body>
   <ul id="navigation">
     <li><?php print l($config['site']['root'], $config['site']['name']); ?>
@@ -23,8 +25,9 @@
        <li class="message"><?php print $message; unset($_SESSION['messages'][$key]); ?></li>
     <?php endforeach; ?>
   </ul>
- <?php endif; ?>
+  <?php endif; ?>
  
- <?php include $body_template; ?>
+ <?php include $template; ?>
 </body>
+
 </html>
