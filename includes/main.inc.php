@@ -8,13 +8,17 @@ mysql_connect('localhost', $config['db']['user'], $config['db']['password']) or 
 mysql_select_db('test_users'); // DATABASE
 mysql_query('SET NAMES utf8');
 
-session_name('example');
+session_name('session');
 session_start();
 
-if (!isset($_SESSION['real'])) { 
+if (!isset($_SESSION['form-token'])) { 
   session_regenerate_id(); 
-  $_SESSION['real'] = true; 
+  $_SESSION['form-token'] = generate_token(); 
 }
+print_r($_SESSION);
+
+if (!empty($_POST) && !validate_form_token())
+  exit('Invalid form token');
 
 $link_vars = array(
   'name' => $_REQUEST['name'],

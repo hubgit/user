@@ -1,10 +1,11 @@
 <?php
 
-require 'includes/functions.inc.php';
+require 'includes/main.inc.php';
 
 if ($_SESSION['uid']){
   $user = user_load($_SESSION['uid']);
-  messages('Welcome ' + $user->name); // TODO: screen name
+  messages('Hello ' . $user->name);
+  print_r($_SESSION);
 }
 ?>
 

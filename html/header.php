@@ -1,8 +1,9 @@
 <html>
 <head>
   <title><?php
-  if ($title) print filter_var($title, FILTER_SANITIZE_SPECIAL_CHARS) . ' | '; 
-  print filter_var($config['site']['name'], FILTER_SANITIZE_SPECIAL_CHARS);
+    if ($title)
+      print filter_var($title, FILTER_SANITIZE_SPECIAL_CHARS) . ' | '; 
+    print filter_var($config['site']['name'], FILTER_SANITIZE_SPECIAL_CHARS);
   ?></title>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
   <link rel="stylesheet" href="css/style.css"/>

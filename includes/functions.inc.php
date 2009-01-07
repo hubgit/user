@@ -1,8 +1,7 @@
 <?php
 
-function messages($message = NULL){
-  if ($message)
-    $_SESSION['messages'][] = $message;
+function messages($message){
+  $_SESSION['messages'][] = $message;
 }
 
 function goto($url, $message = NULL){
