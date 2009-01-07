@@ -10,10 +10,3 @@
     <?php endforeach; ?>
   </ul>
  <?php endif; ?>
- 
-<?php
-  if ($_SESSION['uid'])
-    print l('logout.php', 'Sign out');
-  else if (!in_array(basename($_SERVER['SCRIPT_NAME']), array('register.php', 'login.php', 'reset.php')))
-    print l('login.php', 'Sign in');
-?>

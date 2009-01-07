@@ -1,6 +1,9 @@
 <?php
 require 'includes/functions.inc.php';
 
+if ($_SESSION['uid'])
+  goto('index.php');
+  
 $name = array_key_exists('name', $_POST) ? $_POST['name'] : NULL;
 
 if ($name && array_key_exists('pass', $_POST))
@@ -12,8 +15,6 @@ if ($_SESSION['uid'])
 
 <?php include 'html/header.html'; ?>
 
-<div class="link"><?php print l('login.php', 'Sign in',  array('name' => $name)); ?></a>
-
 <form id="register" action="" method="POST">
   <input type="text" name="name" id="register-name" value="<?php if (array_key_exists('name', $_REQUEST)) print filter_var($_REQUEST['name'], FILTER_SANITIZE_SPECIAL_CHARS); ?>"> 
   <label for="register-name">Email address</label><br>
@@ -21,3 +22,7 @@ if ($_SESSION['uid'])
   <label for="register-pass">Password</label><br>
   <input type="submit" value="Register">
 </form>
+
+<div id="links">
+  <p>If you already have an account, <?php print l('login.php', 'sign in', array('name' => $name)); ?> instead.</p>
+</div>
