@@ -15,10 +15,11 @@ if (!isset($_SESSION['form-token'])) {
   session_regenerate_id(); 
   $_SESSION['form-token'] = generate_token(); 
 }
-print_r($_SESSION);
 
-if (!empty($_POST) && !validate_form_token())
-  exit('Invalid form token');
+debug($_SESSION);
+
+if (!empty($_POST))
+  validate_form_token();
 
 $link_vars = array(
   'name' => $_REQUEST['name'],

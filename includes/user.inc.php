@@ -51,7 +51,6 @@ function user_login($name, $password){
   if ($hasher->CheckPassword($password, $user->password)){
     session_regenerate_id(TRUE);
     $_SESSION['uid'] = $user->id;
-    $_SESSION['form-token'] = generate_token();
   }
 }
 

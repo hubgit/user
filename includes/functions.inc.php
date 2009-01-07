@@ -52,12 +52,8 @@ function generate_token($length = 16){
 }
 
 function validate_form_token(){
-  if (array_key_exists('form-token', $_SESSION))
-    if ($_REQUEST['form-token'] == $_SESSION['form-token'])
-      return true;
-    else
-      messages('Invalid form token');
-  else // anonymous
-    return TRUE;
+  if ($_REQUEST['form-token'] != $_SESSION['form-token'])
+    exit('Invalid form token');
+  return TRUE;
 }
 
