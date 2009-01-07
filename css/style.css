@@ -1,0 +1,29 @@
+#navigation {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
+}
+
+#navigation li {
+  display: inline;
+}
+
+#navigation a {
+  color: #000;
+  text-decoration: none; 
+  padding: 0 10px;
+}
+
+#profile-main {
+  margin-bottom: 20px; 
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0; 
+}

@@ -2,4 +2,4 @@
 require 'includes/functions.inc.php';
 
 user_logout();
-goto('login.php');
+goto('index.php', 'Signed out');

@@ -8,19 +8,15 @@ if ($_SESSION['uid']){
 }
 ?>
 
-<?php include 'html/header.html'; ?>
-  
-<dl>
- <dt><?php print $user->id; ?></dt>
- <dd><?php print $user->name; ?></dd>
-</dl>
+<?php include 'html/header.php'; ?>
 
 <ul id="links">
   <?php if ($_SESSION['uid']): ?>
-    <li><?php print l('edit.php', 'Edit your profile'); ?></li>
-    <li><?php print l('logout.php', 'Sign out'); ?></li>
   <?php else: ?>
-    <li>If you already have an account, <?php print l('login.php', 'sign in', array('name' => $name)); ?>.</li>
-    <li>If not, <?php print l('register.php', 'register',  array('name' => $name)); ?> first.</li>
+    <li>If you already have an account, <?php print l('login.php', 'sign in', $link_vars); ?>.</li>
+    <li>If not, <?php print l('register.php', 'register', $link_vars); ?> first.</li>
   <?php endif; ?>
 </ul>
+
+<?php include 'html/footer.php'; ?>
+
