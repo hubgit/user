@@ -1,6 +1,9 @@
 <?php
 require 'includes/main.inc.php';
 
+if (array_key_exists('token', $_GET))
+  user_confirm_email($_GET['token']);
+
 if (!$_SESSION['uid'])
   goto('login.php');
 
