@@ -68,7 +68,7 @@ function user_send_password_reset($name){
   $user = user_load(NULL, $name); // name
   if (!$user)
     $user = user_load(NULL, NULL, $name); // email
-  if (!$user){
+  if (!$user || !$user->email){
     messages('Unknown username or email address');
     return;
   }

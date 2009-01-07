@@ -4,7 +4,7 @@ require 'includes/functions.inc.php';
 if ($_SESSION['uid'])
   goto('index.php');
   
-$name = array_key_exists('name', $_POST) ? $_POST['name'] : NULL;
+$name = array_key_exists('name', $_POST) ? trim($_POST['name']) : NULL;
 
 if ($name && array_key_exists('password', $_POST))
   user_login($name, $_POST['password']);

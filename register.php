@@ -4,8 +4,7 @@ require 'includes/functions.inc.php';
 if ($_SESSION['uid'])
   goto('index.php');
   
-$name = array_key_exists('name', $_POST) ? $_POST['name'] : NULL;
-$email = array_key_exists('email', $_POST) ? $_POST['email'] : NULL;
+$name = array_key_exists('name', $_POST) ? trim($_POST['name']) : NULL;
 
 if ($name && array_key_exists('password', $_POST))
   user_register($name, $_POST['password']);
