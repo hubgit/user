@@ -23,6 +23,6 @@ if ($_SESSION['uid'])
   <input type="submit" value="Register">
 </form>
 
-<div id="links">
-  <p>If you already have an account, <?php print l('login.php', 'sign in', array('name' => $name)); ?> instead.</p>
-</div>
+<ul id="links">
+  <li>If you already have an account, <?php print l('login.php', 'sign in', array('name' => $name)); ?> instead.</li>
+</ul>

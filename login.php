@@ -26,7 +26,7 @@ if ($name)
   <input type="submit" value="Sign in">
 </form>
 
-<div id="links">
-  <p>If you haven't already got an account, <?php print l('register.php', 'register',  array('name' => $name)); ?> first.</p>
-  <p>Forgot your password? <?php print l('reset.php', 'Reset it'); ?> now.</p>
-</div>
+<ul id="links">
+  <li>If you haven't already got an account, <?php print l('register.php', 'register',  array('name' => $name)); ?> first.</li>
+  <li>Forgot your password? <?php print l('reset.php', 'Reset it'); ?> now.</li>
+</ul>

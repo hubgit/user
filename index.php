@@ -15,11 +15,12 @@ if ($_SESSION['uid']){
  <dd><?php print $user->name; ?></dd>
 </dl>
 
-<div id="links">
+<ul id="links">
   <?php if ($_SESSION['uid']): ?>
-    <p><?php print l('logout.php', 'Sign out'); ?></p>
+    <li><?php print l('edit.php', 'Edit you profile'); ?></li>
+    <li><?php print l('logout.php', 'Sign out'); ?></li>
   <?php else: ?>
-    <p>If you already have an account, <?php print l('login.php', 'sign in', array('name' => $name)); ?>.</p>
-    <p>If not, <?php print l('register.php', 'register',  array('name' => $name)); ?> first.</p>
+    <li>If you already have an account, <?php print l('login.php', 'sign in', array('name' => $name)); ?>.</li>
+    <li>If not, <?php print l('register.php', 'register',  array('name' => $name)); ?> first.</li>
   <?php endif; ?>
-</div>
+</ul>
