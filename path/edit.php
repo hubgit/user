@@ -8,7 +8,7 @@ if (!$_SESSION['uid'])
 
 $user = user_load($_SESSION['uid']);
 
-foreach (array('password', 'name', 'email') as $key)
+foreach (array('password', 'name', 'email', 'facebook') as $key)
   if (array_key_exists($key, $_POST) && $_POST[$key] && $_POST[$key] != $user->{$key})
     user_set_profile($_SESSION['uid'], $key, $_POST[$key]);
 

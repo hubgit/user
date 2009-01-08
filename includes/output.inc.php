@@ -5,7 +5,7 @@ list($type, $format) = parse_accept_headers();
 $template = sprintf('%s/%s.tpl.php', $format, $path[0]);
 
 header("Content-Type: $type;charset=UTF-8");
-require $format . '/main.tpl.php';
+require $format . '/_main.tpl.php';
 
 function parse_accept_headers($default = 'html'){
   $formats = array(

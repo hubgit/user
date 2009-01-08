@@ -138,6 +138,21 @@ function user_validate_email($id, $email){
   return FALSE;
 }
 
+function user_validate_facebook($id, $uid){
+  print_r($uid);
+  require_once 'libs/facebook/client/facebook.php';
+  
+  global $config;
+  $facebook = new Facebook($config['facebook']['api-key'], $config['facebook']['secret']);
+  print_r(array($config['facebook']['api-key'], $config['facebook']['secret']));
+  $uid = $facebook->get_loggedin_user();
+  print "uid";
+  //exit();
+  if ($uid)
+    return $uid;
+}
+
+
 function user_confirm_email($token){
   $result = db_query("SELECT id FROM users WHERE email_token = '%s' AND email_tmp IS NOT NULL", $token);
   if (mysql_num_rows($result))
