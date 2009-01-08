@@ -1,7 +1,7 @@
 <?php
 
 if (!$_SESSION['uid'])
-  goto('login.php');
+  goto('login');
   
 $user = user_load($_SESSION['uid']);
 

@@ -7,13 +7,11 @@ array_shift($path);
 
 if (empty($path))
   $path[] = 'index';
-
-print_r($path);
   
 $file = sprintf('path/%s.php', preg_replace('[^a-z]', '', $path[0]));
-if (file_exists($file))
-  require $file;
-else
-  require 'path/index.php';
+if (!file_exists($file))
+  goto('index');
+
+require $file;
 
 require 'includes/output.inc.php'; 

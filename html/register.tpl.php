@@ -13,6 +13,6 @@
 </form>
 
 <ul id="links">
-  <li>If you already have an account, <?php print l('login.php', 'sign in', $link_vars); ?> instead.</li>
-  <li>Forgot your password? <?php print l('reset.php', 'Reset it',  $link_vars); ?> now.</li>
+  <li>If you already have an account, <?php print l('login', 'sign in', $link_vars); ?> instead.</li>
+  <li>Forgot your password? <?php print l('reset', 'Reset it',  $link_vars); ?> now.</li>
 </ul>

@@ -14,8 +14,8 @@
   <ul id="navigation">
     <li><?php print l($config['site']['root'], $config['site']['name']); ?>
     <?php if ($_SESSION['uid']): ?>
-      <li><?php print l('profile.php', $user->name); ?></li>
-      <li><?php print l('logout.php', 'Sign out'); ?></li>
+      <li><?php print l('profile', $user->name); ?></li>
+      <li><?php print l('logout', 'Sign out'); ?></li>
     <?php endif; ?>
   </ul>
   

@@ -82,11 +82,11 @@ function user_send_password_reset($name){
   global $config;
   
   $headers = sprintf("From: %s\r\n", $config['site']['email']);
-  $link = sprintf('http://%s%s/reset.php?token=%s', $_SERVER['SERVER_NAME'], $config['site']['root'], urlencode($token));
+  $link = sprintf('http://%s%s/reset?token=%s', $_SERVER['SERVER_NAME'], $config['site']['root'], urlencode($token));
   mail($user->email, 'New password', sprintf("Password: %s\nConfirmation link: %s\n", $password, $link), $headers);
   
   $result = db_query("UPDATE users SET password_tmp = '%s', password_token = '%s' WHERE id = %d", $password, $token, $user->id);
-  goto('index.php', 'Password sent by email'); 
+  goto('index', 'Password sent by email'); 
 }
 
 function user_reset_password($token){
@@ -94,12 +94,12 @@ function user_reset_password($token){
   if (mysql_num_rows($result))
     $id = mysql_result($result, 0);
   else 
-    goto('reset.php', 'Invalid token');
+    goto('reset', 'Invalid token');
     
   $result = db_query("UPDATE users SET password = password_tmp, password_tmp = NULL, password_token = NULL WHERE id = %d", $id);
   $_SESSION['uid'] = $id;
   user_refresh($id);
-  goto('edit.php', 'Your new password is now active and you are signed in. You may edit your password here if you like.');
+  goto('edit', 'Your new password is now active and you are signed in. You may edit your password here if you like.');
 }
 
 function user_refresh($id){
@@ -129,7 +129,7 @@ function user_validate_email($id, $email){
   
   global $config;
   $headers = sprintf("From: %s\r\n", $config['site']['email']);
-  $link = sprintf('http://%s%s/edit.php?token=%s', $_SERVER['SERVER_NAME'], $config['site']['root'], urlencode($token));
+  $link = sprintf('http://%s%s/edit?token=%s', $_SERVER['SERVER_NAME'], $config['site']['root'], urlencode($token));
   mail($email, 'Confirm email address', "Confirmation link: $link\n", $headers);
   
   $result = db_query("UPDATE users SET email_tmp = '%s', email_token = '%s' WHERE id = %d", $email, $token, $id);
@@ -143,12 +143,12 @@ function user_confirm_email($token){
   if (mysql_num_rows($result))
     $id = mysql_result($result, 0);
   else 
-    goto('edit.php', 'Invalid token');
+    goto('edit', 'Invalid token');
     
   $result = db_query("UPDATE users SET email = email_tmp, email_tmp = NULL, email_token = NULL WHERE id = %d", $id);
   $_SESSION['uid'] = $id;
   user_refresh($id);
-  goto('edit.php', 'Your email address has been updated.');
+  goto('edit', 'Your email address has been updated.');
 }
 
 function user_set_profile($id, $key, $value){

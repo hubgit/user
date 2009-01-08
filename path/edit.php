@@ -4,7 +4,7 @@ if (array_key_exists('token', $_GET))
   user_confirm_email($_GET['token']);
 
 if (!$_SESSION['uid'])
-  goto('login.php');
+  goto('login');
 
 $user = user_load($_SESSION['uid']);
 

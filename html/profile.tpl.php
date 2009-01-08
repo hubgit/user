@@ -6,6 +6,6 @@
 
 <ul id="links">
   <?php if ($profile->id == $user->id): ?>
-    <li><?php print l('edit.php', 'Edit your profile'); ?></li>
+    <li><?php print l('edit', 'Edit your profile'); ?></li>
   <?php endif; ?>
 </ul>

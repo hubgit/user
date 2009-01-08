@@ -1,4 +1,4 @@
 <?php
 
 user_logout();
-goto('index.php', 'Signed out');
+goto('index', 'Signed out');

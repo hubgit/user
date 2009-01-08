@@ -10,6 +10,6 @@
 </form>
 
 <ul id="links">
-  <li>If you haven't already got an account, <?php print l('register.php', 'register',  $link_vars); ?> first.</li>
-  <li>Forgot your password? <?php print l('reset.php', 'Reset it',  $link_vars); ?> now.</li>
+  <li>If you haven't already got an account, <?php print l('register', 'register',  $link_vars); ?> first.</li>
+  <li>Forgot your password? <?php print l('reset', 'Reset it',  $link_vars); ?> now.</li>
 </ul>
