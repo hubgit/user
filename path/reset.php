@@ -1,5 +1,4 @@
 <?php
-require 'includes/main.inc.php';
 
 if ($_SESSION['uid'])
   goto('index.php');
@@ -14,4 +13,3 @@ if ($_SESSION['uid'])
   goto('edit.php');
 
 $title = 'Reset your password';
-include 'includes/output.inc.php'; 

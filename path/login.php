@@ -1,5 +1,4 @@
 <?php
-require 'includes/main.inc.php';
 
 if ($_SESSION['uid'])
   goto('index.php');
@@ -16,6 +15,3 @@ if ($name)
   messages('Unknown username or password');
 
 $title = 'Sign in';
-include 'includes/output.inc.php'; 
-
-

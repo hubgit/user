@@ -1,5 +1,4 @@
 <?php
-require 'includes/main.inc.php';
 
 if ($_SESSION['uid'])
   goto('index.php');
@@ -16,7 +15,4 @@ if ($_SESSION['uid'])
     <p>Otherwise, <a href="%s">continue to the front page</a>.</p>', filter_var($name, FILTER_SANITIZE_SPECIAL_CHARS), $config['site']['root']));
 
 $title = 'Register a new account';
-include 'includes/output.inc.php'; 
-
-
 

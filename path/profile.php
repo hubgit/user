@@ -1,5 +1,4 @@
 <?php
-require 'includes/main.inc.php';
 
 if (!$_SESSION['uid'])
   goto('login.php');
@@ -21,4 +20,3 @@ $items = array(
   );
  
 $title = $profile->name;
-include 'includes/output.inc.php'; 

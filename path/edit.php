@@ -1,5 +1,4 @@
 <?php
-require 'includes/main.inc.php';
 
 if (array_key_exists('token', $_GET))
   user_confirm_email($_GET['token']);
@@ -16,4 +15,3 @@ foreach (array('password', 'name', 'email') as $key)
 $user = user_load($_SESSION['uid'], NULL, NULL, FALSE); // load fresh
 
 $title = 'Edit your profile';
-include 'includes/output.inc.php'; 

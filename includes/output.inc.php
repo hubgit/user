@@ -8,7 +8,7 @@ $file = preg_replace('/[^a-z]/', '', $file); // sanitize
 $template = sprintf('%s/%s.tpl.php', $format, $file);
 
 header("Content-Type: $type;charset=UTF-8");
-require $format . '/content.tpl.php';
+require $format . '/main.tpl.php';
 
 function parse_accept_headers($default = 'html'){
   $formats = array(
