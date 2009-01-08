@@ -2,10 +2,7 @@
 
 list($type, $format) = parse_accept_headers();
 
-$file = basename($_SERVER['SCRIPT_FILENAME'], '.php');
-$file = preg_replace('/[^a-z]/', '', $file); // sanitize
-
-$template = sprintf('%s/%s.tpl.php', $format, $file);
+$template = sprintf('%s/%s.tpl.php', $format, $path[0]);
 
 header("Content-Type: $type;charset=UTF-8");
 require $format . '/main.tpl.php';
