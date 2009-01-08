@@ -2,9 +2,6 @@
 
 require 'includes/main.inc.php';
 
-if ($_SESSION['uid']){
-  $user = user_load($_SESSION['uid']);
-  messages('Hello ' . $user->name);
-}
+print $_GET['path'];
 
-include 'includes/output.inc.php'; 
+require 'includes/output.inc.php'; 

@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteBase /users/
+RewriteRule ^(.+)$ index.php?path=$1
